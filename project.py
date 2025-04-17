@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import precision_score, recall_score, f1_score, roc_curve, auc, confusion_matrix
+from sklearn.metrics import f1_score, roc_curve, auc, confusion_matrix
 
 
 st.title("Predicting a Deal's Success")
@@ -32,9 +32,9 @@ with tab1:
     st.title("Data Description & Preprocessing")
 
     #import data and mappings
-    companies = pd.read_csv('/mount/src/salesplaybook/anonymized_hubspot_companies.csv')
-    deals =  pd.read_csv('/mount/src/salesplaybook/anonymized_hubspot_deals.csv')
-    with open('/mount/src/salesplaybook//mappings.json', 'r') as f:
+    companies = pd.read_csv('./anonymized_hubspot_companies.csv')
+    deals =  pd.read_csv('./anonymized_hubspot_deals.csv')
+    with open('./mappings.json', 'r') as f:
         mappings = json.load(f)
 
     st.subheader("Source")
@@ -120,7 +120,7 @@ with tab1:
         # drop "other" features
 
     #sns.pairplot(deals_dummies, hue = "Is Closed Won" ,palette='coolwarm')
-    st.image('/mount/src/salesplaybook/pairplot.png')
+    st.image('./pairplot.png')
     "Evaluating the pairplot, the data doesn't look like it has features or relationships that are significantly less impactful than others for the target variable, so we will continue with these features. Now, we can remove the target variable to create our X and y data."
     
     with st.echo():     
@@ -160,15 +160,18 @@ with tab1:
         test_components = pca.transform(X_test_norm) 
 
     st.title("Methodology")
+    "Since we are trying to predict if a deal will succeed or not, we are predicting a binary variable  - either it will or it will not. Therefore, this is a classification task. Since we have data from previous deals to train the model on, this will be an example of supervised learning. Two supervised classification models are Logistic Regression and K Nearest Neighbors."
    
     st.subheader("Logistic Regression")
+    "Logistic regression applies a sigmoid function to a multiple linear regression, to transform the output into a probabilty between 0 and 1. The model classifies the item as either 0 or 1 based on which one is closer. The loss function aims to maximize the joint likelihood of all samples"
     "Logistic regression has no hyperparameters, so we can create the model as-is."
     
     with st.echo():
         lgr_model = LogisticRegression(solver='sag', max_iter=100000, penalty=None)
         lgr_model.fit(train_components,y_train) 
 
-    st.subheader("KNN")
+    st.subheader("K Nearest Neighbors")
+    "The K Nearest Neighbors algorithm classifies data based on feature similarity. It will find the K datapoints that are closest in euclidian distance, and take the label that is most common within that group."
     "KNN has the hyperparameter of k(number of neighbors). So, we will test multiple values and run cross validation to see the best value for the output."
 
     scores_list = []
@@ -190,11 +193,6 @@ with tab1:
     with st.echo():
          knn = KNeighborsClassifier(n_neighbors=25)
          knn.fit(train_components, y_train)
-
-
-    "a. Description and explanation of the chosen machine learning algorithms"
-    "b. Justification for model selection"
-    "d. Baseline methods for comparison (if applicable)"
 
     st.title("Results & Evalution")
     st.subheader("Model Performance Metrics")
@@ -256,23 +254,22 @@ with tab1:
         sns.heatmap(cm_k, annot=True, fmt="d", cmap="Blues", xticklabels=["Predicted Loss", "Predicted Win"], yticklabels=["Actual Loss", "Actual Win"])
         st.pyplot(plt)
 
-#For classification tasks, evaluate performance using at least accuracy, AUC, and F1 score.
-
-    #print("KNN mean:\n",np.mean(scores_list[3]),"\nKNN std:\n",np.std(scores_list[3]))
-
-   # print("Linear regression mean:\n",np.mean(scores_lr),"\nLinear Regression std:\n",np.std(scores_lr))
     
     st.subheader("Comparison")
-    "Discussion of strengths and limitations"
+    "Based on the model accuracy, AUC, and F1, logistic regression performs better than KNN across all metrics. However, even logistic regressions performance is less than perfect. The model is not predicting with as much accuracy as woudl be ideal. The ROC curves are similar between the two models. Interestingly, both models classify exactly the same when the data is actually a loss (88% accuracy). However, KNN misses more true wins, incorrectly classifying them as losses. "
 
     st.title("Conclusion & Future Work")
     st.subheader("Key Findings")
+    "Working with real data, we see that it is not perfect and has some accuracy problems in predicting model success. It is possible that their are some key variables missing from the data that are better predictors of success. However, we can see that the logistic and KNN models perform similarlly, but that the logistic model fits this data better. It is also interesting to see what variables are good predictors. It was suprising to me that the industry would be more impactful than the deal amount, for example."
     st.subheader("Next Steps")
+    "For more improvement, it could be useful to look at the interventions used in each deal and which ones were successful/contributed to the deals success. I would like to dive deeper into further classification of the deals: not just as predicted win/loss but as how likely they would be to respond to certain interventions and how that could change their win/loss prediction."
 
     st.title("References")
+    "Dataset courtesy of Reece Lincoln, SymTrain. All other materials from Vanderbilt University CS 3252 and Dr. Helen Kong."
 
 
     st.title("Appendix")
+    "For complete materials and code, visit https://github.com/camikrugel/SalesPlayBook."
 
 
 with tab2:
