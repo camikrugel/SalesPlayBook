@@ -32,9 +32,9 @@ with tab1:
     st.title("Data Description & Preprocessing")
 
     #import data and mappings
-    companies = pd.read_csv('/Users/cami/Desktop/CS_3262/Industry_project/anonymized_hubspot_companies.csv')
-    deals =  pd.read_csv('/Users/cami/Desktop/CS_3262/Industry_project/anonymized_hubspot_deals.csv')
-    with open('/Users/cami/Desktop/CS_3262/Industry_project/mappings.json', 'r') as f:
+    companies = pd.read_csv('/mount/src/salesplaybook/project.py/anonymized_hubspot_companies.csv')
+    deals =  pd.read_csv('/mount/src/salesplaybook/project.py/anonymized_hubspot_deals.csv')
+    with open('/mount/src/salesplaybook/project.py/mappings.json', 'r') as f:
         mappings = json.load(f)
 
     st.subheader("Source")
