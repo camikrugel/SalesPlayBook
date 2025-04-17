@@ -164,6 +164,7 @@ with tab1:
    
     st.subheader("Logistic Regression")
     "Logistic regression applies a sigmoid function to a multiple linear regression, to transform the output into a probabilty between 0 and 1. The model classifies the item as either 0 or 1 based on which one is closer. The loss function aims to maximize the joint likelihood of all samples"
+   
     "Logistic regression has no hyperparameters, so we can create the model as-is."
     
     with st.echo():
@@ -172,6 +173,7 @@ with tab1:
 
     st.subheader("K Nearest Neighbors")
     "The K Nearest Neighbors algorithm classifies data based on feature similarity. It will find the K datapoints that are closest in euclidian distance, and take the label that is most common within that group."
+   
     "KNN has the hyperparameter of k(number of neighbors). So, we will test multiple values and run cross validation to see the best value for the output."
 
     scores_list = []
