@@ -1,9 +1,7 @@
-
-json
 streamlit
 pandas 
 numpy
 matplotlib
 seaborn 
 pandas
-sklearn
+scikit-learn
