@@ -3,11 +3,7 @@ json
 streamlit
 pandas 
 numpy
-matplotlib.pyplot
+matplotlib
 seaborn 
-pandas.api.types
-sklearn.model_selection 
-sklearn.decomposition 
-sklearn.linear_model 
-sklearn.neighbors 
-sklearn.metrics 
+pandas
+sklearn
