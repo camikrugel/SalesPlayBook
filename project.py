@@ -33,8 +33,8 @@ with tab1:
 
     #import data and mappings
     companies = pd.read_csv('/mount/src/salesplaybook/project.py/anonymized_hubspot_companies.csv')
-    deals =  pd.read_csv('/mount/src/salesplaybook/project.py/anonymized_hubspot_deals.csv')
-    with open('/mount/src/salesplaybook/project.py/mappings.json', 'r') as f:
+    deals =  pd.read_csv('/mount/src/salesplaybook/anonymized_hubspot_deals.csv')
+    with open('/mount/src/salesplaybook//mappings.json', 'r') as f:
         mappings = json.load(f)
 
     st.subheader("Source")
