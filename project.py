@@ -120,7 +120,7 @@ with tab1:
         # drop "other" features
 
     #sns.pairplot(deals_dummies, hue = "Is Closed Won" ,palette='coolwarm')
-    st.image('/Users/cami/Desktop/pairplot.png')
+    st.image('/mount/src/salesplaybook/pairplot.png')
     "Evaluating the pairplot, the data doesn't look like it has features or relationships that are significantly less impactful than others for the target variable, so we will continue with these features. Now, we can remove the target variable to create our X and y data."
     
     with st.echo():     
