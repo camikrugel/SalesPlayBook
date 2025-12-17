@@ -15,7 +15,7 @@ from sklearn.metrics import f1_score, roc_curve, auc, confusion_matrix
 
 st.title("Predicting a Deal's Success")
 
-"Cami Krugel - 000828616"
+"Cami Krugel"
 
 tab1, tab2 = st.tabs(["Report", "Try it Out!"])
 
