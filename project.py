@@ -229,7 +229,7 @@ with tab1:
         plt.plot(
             fpr[model],
             tpr[model],
-            label= model % auc_tem[model],
+            label= f"{model} (AUC = {auc_tem[model]:.3f})",
         )
     plt.plot([0, 1], [0, 1], color="navy", lw=2, linestyle="--")
     plt.xlim([0.0, 1.0])
